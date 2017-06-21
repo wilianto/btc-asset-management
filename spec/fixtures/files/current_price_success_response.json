@@ -1,0 +1,19 @@
+{
+  "prices": {
+    "btcidr": "36000000",
+    "ltcbtc": "1600",
+    "dogebtc": "120",
+    "xpybtc": "4500",
+    "nbtbtc": "30000",
+    "xrpbtc": "9000",
+    "drkbtc": "6800",
+    "btsbtc": "12000",
+    "sdcbtc": "4500",
+    "cravebtc": "7100",
+    "nxtbtc": "6400",
+    "strbtc": "1500",
+    "nembtc": "7700",
+    "testbtc": "100",
+    "ethbtc": "1400"
+  }
+}
