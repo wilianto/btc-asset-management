@@ -46,10 +46,23 @@ describe VipAsset do
       asset = VipAsset.new idr: 10_000, idr_hold: 2_000, btc: 0.001, btc_hold: 1.001, eth: 0.15, eth_hold: 0.1, price_btc_idr: 9_000, price_eth_btc: 14_000_000
       asset.save!
 
-      total_btc = ((0.001 + 1.001) + ((0.15 + 0.1) * 14_000_000 / 100_000_000) + ((10_000 + 2_000) / 9_000.0)).round(5)
-      total_idr = total_btc * 9_000
+      total_btc = (
+                    BigDecimal.new("0.001") + BigDecimal.new("1.001") + 
+                    ((BigDecimal.new("0.15") + BigDecimal.new("0.1")) * BigDecimal.new("14000000") / BigDecimal.new("100000000")) + 
+                    ((BigDecimal.new("10000") + BigDecimal.new("2000")) / BigDecimal.new("9000"))
+                  )
+      total_idr = total_btc * BigDecimal.new("9_000")
       expect(asset.total_btc).to eq total_btc.round(5)
       expect(asset.total_idr).to eq total_idr.round(5)
+    end
+
+    context "no exchange price rate" do
+      it "saves successfully" do
+        asset = create :vip_asset, idr: 1000, btc: 5
+
+        expect(asset.total_btc).to eq BigDecimal.new("5").round(5)
+        expect(asset.total_idr).to eq BigDecimal.new("1000").round(5)
+      end
     end
   end
 end
