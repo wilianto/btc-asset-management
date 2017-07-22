@@ -1,4 +1,4 @@
-server 'pahawang.wilianto.com', port: 3000, roles: [:web, :app, :db], primary: true
+server 'pahawang.wilianto.com', port: 22, roles: [:web, :app, :db], primary: true
 
 set :repo_url,        'git@github.com:wilianto/btc-asset-management.git'
 set :application,     'btc-asset-management'
@@ -73,7 +73,6 @@ namespace :deploy do
   end
 
   before :starting,     :check_revision
-  after  :finishing,    :compile_assets
   after  :finishing,    :cleanup
   after  :finishing,    :restart
 end
