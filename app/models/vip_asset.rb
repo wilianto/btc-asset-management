@@ -1,9 +1,23 @@
 class VipAsset < ApplicationRecord
   before_save :calculate_total
+  after_initialize :calculate_total
 
   def calculate_total
     calculate_total_btc
     calculate_total_idr
+  end
+
+  def percentage currency
+    ratio = attributes[currency] + attributes["#{currency}_hold"]
+    ratio *= attributes["price_btc_idr"] unless currency == "idr"
+    ratio *= attributes["price_#{currency}_btc"] / 100_000_000 unless currency == "idr" || currency == "btc"
+
+    if calculate_total_idr != 0
+      percentage = ratio / calculate_total_idr * 100
+      return percentage.round(2)
+    else
+      return 0.0
+    end
   end
 
   private
