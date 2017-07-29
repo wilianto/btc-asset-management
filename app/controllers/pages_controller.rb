@@ -1,5 +1,6 @@
 class PagesController < ApplicationController
   def preview
+    response.headers["Access-Control-Allow-Origin"] = "vip.wilianto.com"
     @vip_asset = VipAsset.new vip_asset_params
   end
 
