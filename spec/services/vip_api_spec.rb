@@ -27,6 +27,7 @@ describe VipApi do
       it "returns hash" do
         prices = VipApi.get_current_price
         expect(prices[:price_btc_idr]).to eq 36_000_000
+        expect(prices[:price_bch_idr]).to eq 3_000_000
         expect(prices[:price_ltc_btc]).to eq 1600
         expect(prices[:price_doge_btc]).to eq 120
         expect(prices[:price_xrp_btc]).to eq 9000
@@ -70,6 +71,7 @@ describe VipApi do
 
         expect(assets[:idr]).to eq 1000
         expect(assets[:btc]).to eq 0.56789
+        expect(assets[:bch]).to eq 0.50000
         expect(assets[:ltc]).to eq 3000
         expect(assets[:doge]).to eq 4000
         expect(assets[:xrp]).to eq 5000
@@ -82,6 +84,7 @@ describe VipApi do
 
         expect(assets[:idr_hold]).to eq 10000
         expect(assets[:btc_hold]).to eq 0.245
+        expect(assets[:bch_hold]).to eq 0.200
         expect(assets[:ltc_hold]).to eq 30000
         expect(assets[:doge_hold]).to eq 40000
         expect(assets[:xrp_hold]).to eq 50000

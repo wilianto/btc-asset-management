@@ -11,6 +11,7 @@ describe "pages/preview.jbuilder" do
 
     expect(json["balance"]["idr"]).to be_present
     expect(json["balance"]["btc"]).to be_present
+    expect(json["balance"]["bch"]).to be_present
     expect(json["balance"]["ltc"]).to be_present
     expect(json["balance"]["doge"]).to be_present
     expect(json["balance"]["xrp"]).to be_present
@@ -23,6 +24,7 @@ describe "pages/preview.jbuilder" do
 
     expect(json["balance_hold"]["idr"]).to be_present
     expect(json["balance_hold"]["btc"]).to be_present
+    expect(json["balance_hold"]["bch"]).to be_present
     expect(json["balance_hold"]["ltc"]).to be_present
     expect(json["balance_hold"]["doge"]).to be_present
     expect(json["balance_hold"]["xrp"]).to be_present
@@ -35,6 +37,7 @@ describe "pages/preview.jbuilder" do
 
     expect(json["percentage"]["idr"]).to be_present
     expect(json["percentage"]["btc"]).to be_present
+    expect(json["percentage"]["bch"]).to be_present
     expect(json["percentage"]["ltc"]).to be_present
     expect(json["percentage"]["doge"]).to be_present
     expect(json["percentage"]["xrp"]).to be_present

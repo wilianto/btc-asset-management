@@ -4,6 +4,7 @@ describe VipAsset do
   it "has columns" do
     is_expected.to have_db_column :idr
     is_expected.to have_db_column :btc
+    is_expected.to have_db_column :bch
     is_expected.to have_db_column :ltc
     is_expected.to have_db_column :doge
     is_expected.to have_db_column :xrp
@@ -16,6 +17,7 @@ describe VipAsset do
 
     is_expected.to have_db_column :idr_hold
     is_expected.to have_db_column :btc_hold
+    is_expected.to have_db_column :bch_hold
     is_expected.to have_db_column :ltc_hold
     is_expected.to have_db_column :doge_hold
     is_expected.to have_db_column :xrp_hold
@@ -27,6 +29,7 @@ describe VipAsset do
     is_expected.to have_db_column :eth_hold
 
     is_expected.to have_db_column :price_btc_idr
+    is_expected.to have_db_column :price_bch_idr
     is_expected.to have_db_column :price_ltc_btc
     is_expected.to have_db_column :price_doge_btc
     is_expected.to have_db_column :price_xrp_btc
@@ -100,6 +103,14 @@ describe VipAsset do
         asset = create :vip_asset, idr: 1_000, idr_hold: 2_000, btc: 1, btc_hold: 0.5, price_btc_idr: 10_000
         percentage_btc = (1.5 * 10_000) / 18_000.0 * 100
         expect(asset.percentage "btc").to eq percentage_btc.round(2)
+      end
+    end
+
+    context "bch" do
+      it "returns percentage of the asset" do
+        asset = create :vip_asset, idr: 1_000, idr_hold: 2_000, bch: 1, bch_hold: 0.5, price_bch_idr: 10_000
+        percentage_bch = (1.5 * 10_000) / 18_000.0 * 100
+        expect(asset.percentage "bch").to eq percentage_bch.round(2)
       end
     end
 

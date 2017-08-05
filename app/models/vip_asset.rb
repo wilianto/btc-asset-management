@@ -9,8 +9,17 @@ class VipAsset < ApplicationRecord
 
   def percentage currency
     ratio = attributes[currency] + attributes["#{currency}_hold"]
-    ratio *= attributes["price_btc_idr"] unless currency == "idr"
-    ratio *= attributes["price_#{currency}_btc"] / 100_000_000 unless currency == "idr" || currency == "btc"
+
+    if currency != "idr"
+      if currency == "bch"
+        ratio *= attributes["price_bch_idr"]
+      elsif currency == "btc"
+        ratio *= attributes["price_btc_idr"]
+      else
+        ratio *= attributes["price_btc_idr"]
+        ratio *= attributes["price_#{currency}_btc"] / 100_000_000
+      end
+    end
 
     if calculate_total_idr != 0
       percentage = ratio / calculate_total_idr * 100
@@ -31,6 +40,7 @@ class VipAsset < ApplicationRecord
   def calculate_total_idr
     rate_idr = attributes["price_btc_idr"] 
     self.total_idr = (self.btc + self.btc_hold) * self.price_btc_idr
+    self.total_idr += (self.bch + self.bch_hold) * self.price_bch_idr
     self.total_idr += self.idr + self.idr_hold + calculate_total_other(rate_idr)
   end
 
