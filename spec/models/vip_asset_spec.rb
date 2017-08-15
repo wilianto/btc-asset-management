@@ -14,6 +14,7 @@ describe VipAsset do
     is_expected.to have_db_column :str
     is_expected.to have_db_column :nem
     is_expected.to have_db_column :eth
+    is_expected.to have_db_column :etc
 
     is_expected.to have_db_column :idr_hold
     is_expected.to have_db_column :btc_hold
@@ -27,6 +28,7 @@ describe VipAsset do
     is_expected.to have_db_column :str_hold
     is_expected.to have_db_column :nem_hold
     is_expected.to have_db_column :eth_hold
+    is_expected.to have_db_column :etc_hold
 
     is_expected.to have_db_column :price_btc_idr
     is_expected.to have_db_column :price_bch_idr
@@ -39,6 +41,8 @@ describe VipAsset do
     is_expected.to have_db_column :price_str_btc
     is_expected.to have_db_column :price_nem_btc
     is_expected.to have_db_column :price_eth_btc
+    is_expected.to have_db_column :price_eth_idr
+    is_expected.to have_db_column :price_etc_idr
 
     is_expected.to have_db_column :total_btc
     is_expected.to have_db_column :total_idr
@@ -46,7 +50,13 @@ describe VipAsset do
 
   context "before save callback" do
     it "set total_idr and total_btc" do
-      asset = VipAsset.new idr: 10_000, idr_hold: 2_000, btc: 0.001, btc_hold: 1.001, eth: 0.15, eth_hold: 0.1, price_btc_idr: 9_000, price_eth_btc: 14_000_000
+      asset = VipAsset.new idr: 10_000, idr_hold: 2_000,
+                           btc: 0.001, btc_hold: 1.001,
+                           bch: 0.001, bch_hold: 1.500,
+                           eth: 0.15, eth_hold: 0.1,
+                           etc: 0.16, etc_hold: 0.2,
+                           price_btc_idr: 9_000, price_bch_idr: 8_000, 
+                           price_eth_btc: 14_000_000, price_etc_idr: 5_000
       asset.save!
 
       total_btc = (
@@ -54,7 +64,9 @@ describe VipAsset do
                     ((BigDecimal.new("0.15") + BigDecimal.new("0.1")) * BigDecimal.new("14000000") / BigDecimal.new("100000000")) + 
                     ((BigDecimal.new("10000") + BigDecimal.new("2000")) / BigDecimal.new("9000"))
                   )
-      total_idr = total_btc * BigDecimal.new("9_000")
+      total_bch = BigDecimal.new("0.001") + BigDecimal.new("1.500")
+      total_etc = BigDecimal.new("0.16") + BigDecimal.new("0.2")
+      total_idr = total_btc * BigDecimal.new("9_000") + total_bch * BigDecimal.new("8000") + total_etc * BigDecimal.new("5000")
       expect(asset.total_btc).to eq total_btc.round(5)
       expect(asset.total_idr).to eq total_idr.round(5)
     end
@@ -71,7 +83,10 @@ describe VipAsset do
 
   context "after initialize callback" do
     it "set total_idr and total_btc" do
-      asset = VipAsset.new idr: 10_000, idr_hold: 2_000, btc: 0.001, btc_hold: 1.001, eth: 0.15, eth_hold: 0.1, price_btc_idr: 9_000, price_eth_btc: 14_000_000
+      asset = VipAsset.new idr: 10_000, idr_hold: 2_000,
+                           btc: 0.001, btc_hold: 1.001,
+                           eth: 0.15, eth_hold: 0.1,
+                           price_btc_idr: 9_000, price_eth_btc: 14_000_000
 
       total_btc = (
                     BigDecimal.new("0.001") + BigDecimal.new("1.001") + 
@@ -111,6 +126,14 @@ describe VipAsset do
         asset = create :vip_asset, idr: 1_000, idr_hold: 2_000, bch: 1, bch_hold: 0.5, price_bch_idr: 10_000
         percentage_bch = (1.5 * 10_000) / 18_000.0 * 100
         expect(asset.percentage "bch").to eq percentage_bch.round(2)
+      end
+    end
+
+    context "etc" do
+      it "returns percentage of the asset" do
+        asset = create :vip_asset, idr: 1_000, idr_hold: 2_000, etc: 1, etc_hold: 0.5, price_etc_idr: 10_000
+        percentage_etc = (1.5 * 10_000) / 18_000.0 * 100
+        expect(asset.percentage "etc").to eq percentage_etc.round(2)
       end
     end
 

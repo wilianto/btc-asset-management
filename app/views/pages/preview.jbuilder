@@ -1,6 +1,7 @@
 json.balance do
   json.idr @vip_asset.idr.to_f
   json.btc @vip_asset.btc.to_f
+  json.etc @vip_asset.etc.to_f
   json.bch @vip_asset.bch.to_f
   json.ltc @vip_asset.ltc.to_f
   json.doge @vip_asset.doge.to_f
@@ -16,6 +17,7 @@ end
 json.balance_hold do
   json.idr @vip_asset.idr_hold.to_f
   json.btc @vip_asset.btc_hold.to_f
+  json.etc @vip_asset.etc_hold.to_f
   json.bch @vip_asset.bch_hold.to_f
   json.ltc @vip_asset.ltc_hold.to_f
   json.doge @vip_asset.doge_hold.to_f
@@ -31,6 +33,7 @@ end
 json.percentage do
   json.idr @vip_asset.percentage("idr").to_f
   json.btc @vip_asset.percentage("btc").to_f
+  json.etc @vip_asset.percentage("etc").to_f
   json.bch @vip_asset.percentage("bch").to_f
   json.ltc @vip_asset.percentage("ltc").to_f
   json.doge @vip_asset.percentage("doge").to_f

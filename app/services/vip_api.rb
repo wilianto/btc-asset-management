@@ -8,6 +8,8 @@ class VipApi
     prices = {
       price_btc_idr: body_price["btcidr"].to_i,
       price_bch_idr: body_price["bchidr"].to_i,
+      price_eth_idr: body_price["ethidr"].to_i,
+      price_etc_idr: body_price["etcidr"].to_i,
       price_ltc_btc: body_price["ltcbtc"].to_i,
       price_doge_btc: body_price["dogebtc"].to_i,
       price_xrp_btc: body_price["xrpbtc"].to_i,

@@ -28,6 +28,8 @@ describe VipApi do
         prices = VipApi.get_current_price
         expect(prices[:price_btc_idr]).to eq 36_000_000
         expect(prices[:price_bch_idr]).to eq 3_000_000
+        expect(prices[:price_eth_idr]).to eq 300_000
+        expect(prices[:price_etc_idr]).to eq 30_000
         expect(prices[:price_ltc_btc]).to eq 1600
         expect(prices[:price_doge_btc]).to eq 120
         expect(prices[:price_xrp_btc]).to eq 9000

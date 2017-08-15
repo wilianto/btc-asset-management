@@ -13,6 +13,8 @@ class VipAsset < ApplicationRecord
     if currency != "idr"
       if currency == "bch"
         ratio *= attributes["price_bch_idr"]
+      elsif currency == "etc"
+        ratio *= attributes["price_etc_idr"]
       elsif currency == "btc"
         ratio *= attributes["price_btc_idr"]
       else
@@ -41,6 +43,7 @@ class VipAsset < ApplicationRecord
     rate_idr = attributes["price_btc_idr"] 
     self.total_idr = (self.btc + self.btc_hold) * self.price_btc_idr
     self.total_idr += (self.bch + self.bch_hold) * self.price_bch_idr
+    self.total_idr += (self.etc + self.etc_hold) * self.price_etc_idr
     self.total_idr += self.idr + self.idr_hold + calculate_total_other(rate_idr)
   end
 
