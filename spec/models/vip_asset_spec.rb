@@ -99,7 +99,7 @@ describe VipAsset do
     end
   end
 
-  context "#percentage" do
+  describe "#percentage" do
     context "idr" do
       it "returns percentage of the asset" do
         asset = create :vip_asset, idr: 1_000, idr_hold: 2_000, btc: 1, price_btc_idr: 10_000
@@ -143,6 +143,26 @@ describe VipAsset do
         percentage_eth = (1.5 * 10_000_000 * 10_000) / 11_500 * 100 / 100_000_000
         expect(asset.percentage "eth").to eq percentage_eth.round(2)
       end
+    end
+  end
+
+  describe "#count_idr_eth_btc_idr" do
+    it "calculate trade for idr->eth->btc->idr" do
+      asset = create :vip_asset, idr: 10_000, idr_hold: 5_000,
+                    price_eth_idr: 4_000, price_eth_btc: 70_000_000, price_btc_idr: 5_000
+      total = 15_000 / 4_000.0 * (70_000_000 / 100_000_000.0) * 5_000
+      margin = total - 15_000
+      expect(asset.count_idr_eth_btc_idr).to eq margin.round(2)
+    end
+  end
+
+  describe "#count_idr_btc_eth_idr" do
+    it "calculate trade for idr->btc->eth->idr" do
+      asset = create :vip_asset, idr: 10_000, idr_hold: 5_000,
+                    price_eth_idr: 4_000, price_eth_btc: 70_000_000, price_btc_idr: 5_000
+      total = 15_000 / 5_000.0 / (70_000_000 / 100_000_000.0) * 4_000
+      margin = total - 15_000
+      expect(asset.count_idr_btc_eth_idr).to eq margin.round(2)
     end
   end
 end

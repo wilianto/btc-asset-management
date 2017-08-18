@@ -53,5 +53,7 @@ describe "pages/preview.jbuilder" do
 
     expect(json["total_idr"]).to be_present
     expect(json["total_btc"]).to be_present
+    expect(json["simulations"]["idr_eth_btc_idr"]).to be_present
+    expect(json["simulations"]["idr_btc_eth_idr"]).to be_present
   end
 end

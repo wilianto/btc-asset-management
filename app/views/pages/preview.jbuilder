@@ -46,5 +46,10 @@ json.percentage do
   json.eth @vip_asset.percentage("eth").to_f
 end
 
+json.simulations do
+  json.idr_eth_btc_idr @vip_asset.count_idr_eth_btc_idr.to_f
+  json.idr_btc_eth_idr @vip_asset.count_idr_btc_eth_idr.to_f
+end
+
 json.total_idr @vip_asset.total_idr.to_f
 json.total_btc @vip_asset.total_btc.to_f
