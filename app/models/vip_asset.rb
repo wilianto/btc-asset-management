@@ -32,14 +32,14 @@ class VipAsset < ApplicationRecord
   end
 
   def count_idr_eth_btc_idr
-    total = (idr + idr_hold) / price_eth_idr * (price_eth_btc / 100_000_000.0) * price_btc_idr
-    margin = total.nan? ? 0 : (total - idr - idr_hold).round(2)
+    total = 1_000_000 / price_eth_idr * (price_eth_btc / 100_000_000.0) * price_btc_idr
+    margin = total.nan? ? 0 : (total - 1_000_000).round(2)
     return margin
   end
 
   def count_idr_btc_eth_idr
-    total = (idr + idr_hold) / price_btc_idr / (price_eth_btc / 100_000_000.0) * price_eth_idr
-    margin = total.nan? ? 0 : (total - idr - idr_hold).round(2)
+    total = 1_000_000 / price_btc_idr / (price_eth_btc / 100_000_000.0) * price_eth_idr
+    margin = total.nan? ? 0 : (total - 1_000_000).round(2)
     return margin
   end
 

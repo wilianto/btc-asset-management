@@ -147,21 +147,19 @@ describe VipAsset do
   end
 
   describe "#count_idr_eth_btc_idr" do
-    it "calculate trade for idr->eth->btc->idr" do
-      asset = create :vip_asset, idr: 10_000, idr_hold: 5_000,
-                    price_eth_idr: 4_000, price_eth_btc: 70_000_000, price_btc_idr: 5_000
-      total = 15_000 / 4_000.0 * (70_000_000 / 100_000_000.0) * 5_000
-      margin = total - 15_000
+    it "calculate trade for idr->eth->btc->idr per 1 million" do
+      asset = create :vip_asset, price_eth_idr: 4_000, price_eth_btc: 70_000_000, price_btc_idr: 5_000
+      total = 1_000_000 / 4_000.0 * (70_000_000 / 100_000_000.0) * 5_000
+      margin = total - 1_000_000
       expect(asset.count_idr_eth_btc_idr).to eq margin.round(2)
     end
   end
 
   describe "#count_idr_btc_eth_idr" do
-    it "calculate trade for idr->btc->eth->idr" do
-      asset = create :vip_asset, idr: 10_000, idr_hold: 5_000,
-                    price_eth_idr: 4_000, price_eth_btc: 70_000_000, price_btc_idr: 5_000
-      total = 15_000 / 5_000.0 / (70_000_000 / 100_000_000.0) * 4_000
-      margin = total - 15_000
+    it "calculate trade for idr->btc->eth->idr per 1 million" do
+      asset = create :vip_asset, price_eth_idr: 4_000, price_eth_btc: 70_000_000, price_btc_idr: 5_000
+      total = 1_000_000 / 5_000.0 / (70_000_000 / 100_000_000.0) * 4_000
+      margin = total - 1_000_000
       expect(asset.count_idr_btc_eth_idr).to eq margin.round(2)
     end
   end
