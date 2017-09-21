@@ -50,7 +50,7 @@ end
 group :test do
   gem 'capybara', '~> 2.8'
   gem 'selenium-webdriver'
-  gem 'shoulda-matchers', git: 'https://github.com/thoughtbot/shoulda-matchers.git', branch: 'rails-5'
+  gem 'shoulda-matchers', '~> 3.1'
   gem 'webmock'
 end
 

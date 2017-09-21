@@ -1,11 +1,3 @@
-GIT
-  remote: https://github.com/thoughtbot/shoulda-matchers.git
-  revision: ead87017a6c15adce66a87dce8ee2ece91d0d27c
-  branch: rails-5
-  specs:
-    shoulda-matchers (3.1.2)
-      activesupport (>= 4.0.0)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -188,6 +180,8 @@ GEM
       childprocess (~> 0.5)
       rubyzip (~> 1.0)
       websocket (~> 1.0)
+    shoulda-matchers (3.1.2)
+      activesupport (>= 4.0.0)
     slop (3.6.0)
     spring (2.0.2)
       activesupport (>= 4.2)
@@ -244,7 +238,7 @@ DEPENDENCIES
   rb-readline
   rspec-rails (~> 3.5)
   selenium-webdriver
-  shoulda-matchers!
+  shoulda-matchers (~> 3.1)
   spring
   spring-watcher-listen (~> 2.0.0)
   timecop
@@ -252,4 +246,4 @@ DEPENDENCIES
   webmock
 
 BUNDLED WITH
-   1.15.1
+   1.16.0.pre.2
