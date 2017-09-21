@@ -3,7 +3,7 @@ require 'rails_helper'
 describe PingController do
   describe "GET /index" do
     before do
-      allow(VipApi).to receive(:get_current_price).and_return({})
+      allow(VipApi).to receive(:get_current_price).and_return({no_registered_currency: 0})
       allow(VipApi).to receive(:get_asset).and_return({})
     end
 

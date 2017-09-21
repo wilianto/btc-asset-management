@@ -15,6 +15,6 @@ class PingController < ApplicationController
   def vip_asset_params
     prices = VipApi.get_current_price
     assets = VipApi.get_asset
-    prices.merge! assets
+    prices.merge!(assets).reject!{ |price| !VipAsset.column_names.include?(price) }
   end
 end
