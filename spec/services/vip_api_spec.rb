@@ -31,6 +31,7 @@ describe VipApi do
         expect(prices[:price_eth_idr]).to eq 300_000
         expect(prices[:price_etc_idr]).to eq 30_000
         expect(prices[:price_xzc_idr]).to eq 3_000
+        expect(prices[:price_btg_idr]).to eq 4_000
         expect(prices[:price_ltc_btc]).to eq 1600
         expect(prices[:price_doge_btc]).to eq 120
         expect(prices[:price_xrp_btc]).to eq 9000
@@ -86,6 +87,7 @@ describe VipApi do
         expect(assets[:str]).to eq 9000
         expect(assets[:nem]).to eq 10000
         expect(assets[:eth]).to eq 11000
+        expect(assets[:btg]).to eq 12000
 
         expect(assets[:idr_hold]).to eq 10000
         expect(assets[:btc_hold]).to eq 0.245
@@ -101,6 +103,7 @@ describe VipApi do
         expect(assets[:str_hold]).to eq 90000
         expect(assets[:nem_hold]).to eq 100000
         expect(assets[:eth_hold]).to eq 110000
+        expect(assets[:btg_hold]).to eq 120000
       end
     end
 
