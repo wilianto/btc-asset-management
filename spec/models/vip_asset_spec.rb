@@ -5,6 +5,7 @@ describe VipAsset do
     is_expected.to have_db_column :idr
     is_expected.to have_db_column :btc
     is_expected.to have_db_column :bch
+    is_expected.to have_db_column :btg
     is_expected.to have_db_column :ltc
     is_expected.to have_db_column :doge
     is_expected.to have_db_column :xrp
@@ -20,6 +21,7 @@ describe VipAsset do
     is_expected.to have_db_column :idr_hold
     is_expected.to have_db_column :btc_hold
     is_expected.to have_db_column :bch_hold
+    is_expected.to have_db_column :btg_hold
     is_expected.to have_db_column :ltc_hold
     is_expected.to have_db_column :doge_hold
     is_expected.to have_db_column :xrp_hold
@@ -34,6 +36,7 @@ describe VipAsset do
 
     is_expected.to have_db_column :price_btc_idr
     is_expected.to have_db_column :price_bch_idr
+    is_expected.to have_db_column :price_btg_idr
     is_expected.to have_db_column :price_ltc_btc
     is_expected.to have_db_column :price_doge_btc
     is_expected.to have_db_column :price_xrp_btc
@@ -59,9 +62,10 @@ describe VipAsset do
                            eth: 0.15, eth_hold: 0.1,
                            etc: 0.16, etc_hold: 0.2,
                            xzc: 0.17, xzc_hold: 0.3,
+                           btg: 0.002, btg_hold: 1.002,
                            price_btc_idr: 9_000, price_bch_idr: 8_000, 
                            price_eth_btc: 14_000_000, price_etc_idr: 5_000,
-                           price_xzc_idr: 6_000
+                           price_xzc_idr: 6_000, price_btg_idr: 7_000
       asset.save!
 
       total_btc = (
@@ -72,7 +76,8 @@ describe VipAsset do
       total_bch = (BigDecimal.new("0.001") + BigDecimal.new("1.500")) * BigDecimal.new("8000") 
       total_etc = (BigDecimal.new("0.16") + BigDecimal.new("0.2")) * BigDecimal.new("5000")
       total_xzc = (BigDecimal.new("0.17") + BigDecimal.new("0.3")) * BigDecimal.new("6000")
-      total_idr = total_btc * BigDecimal.new("9_000") + total_bch + total_etc + total_xzc
+      total_btg = (BigDecimal.new("0.002") + BigDecimal.new("1.002")) * BigDecimal.new("7000")
+      total_idr = total_btc * BigDecimal.new("9_000") + total_bch + total_etc + total_xzc + total_btg
       expect(asset.total_btc).to eq total_btc.round(5)
       expect(asset.total_idr).to eq total_idr.round(5)
     end
@@ -130,6 +135,14 @@ describe VipAsset do
         asset = create :vip_asset, idr: 1_000, idr_hold: 2_000, xzc: 1, xzc_hold: 0.5, price_xzc_idr: 10_000
         percentage_xzc = (1.5 * 10_000) / 18_000.0 * 100
         expect(asset.percentage "xzc").to eq percentage_xzc.round(2)
+      end
+    end
+
+    context "btg" do
+      it "returns percentage of the asset" do
+        asset = create :vip_asset, idr: 1_000, idr_hold: 2_000, btg: 1, btg_hold: 0.5, price_btg_idr: 10_000
+        percentage_btg = (1.5 * 10_000) / 18_000.0 * 100
+        expect(asset.percentage "btg").to eq percentage_btg.round(2)
       end
     end
 

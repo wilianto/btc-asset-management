@@ -13,6 +13,7 @@ json.balance do
   json.str @vip_asset.str.to_f
   json.nem @vip_asset.nem.to_f
   json.eth @vip_asset.eth.to_f
+  json.btg @vip_asset.btg.to_f
 end
 
 json.balance_hold do
@@ -30,6 +31,7 @@ json.balance_hold do
   json.str @vip_asset.str_hold.to_f
   json.nem @vip_asset.nem_hold.to_f
   json.eth @vip_asset.eth_hold.to_f
+  json.btg @vip_asset.btg_hold.to_f
 end
 
 json.percentage do
@@ -47,6 +49,7 @@ json.percentage do
   json.str @vip_asset.percentage("str").to_f
   json.nem @vip_asset.percentage("nem").to_f
   json.eth @vip_asset.percentage("eth").to_f
+  json.btg @vip_asset.percentage("btg").to_f
 end
 
 json.simulations do

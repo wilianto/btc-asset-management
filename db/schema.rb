@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170921043148) do
+ActiveRecord::Schema.define(version: 20171125154225) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -62,6 +62,9 @@ ActiveRecord::Schema.define(version: 20170921043148) do
     t.decimal "xzc", precision: 15, scale: 5, default: "0.0", null: false
     t.decimal "xzc_hold", precision: 15, scale: 5, default: "0.0", null: false
     t.decimal "price_xzc_idr", precision: 15, scale: 5, default: "0.0", null: false
+    t.decimal "btg", precision: 15, scale: 5, default: "0.0", null: false
+    t.decimal "btg_hold", precision: 15, scale: 5, default: "0.0", null: false
+    t.decimal "price_btg_idr", precision: 15, scale: 5, default: "0.0", null: false
   end
 
 end
